@@ -74,6 +74,10 @@ body {
     background-color: #adadfd;
 }
 
+.thumbnail {
+    border-radius: 50%;
+}
+
 /* source of loading indicator: https://icons8.com/cssload/en/spinners */
 
 .loading-indicator {
