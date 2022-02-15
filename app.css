@@ -1,0 +1,75 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    font-size: 1.1rem;;
+}
+
+.btn {
+    border: 2px solid #5a5a8b;
+    cursor: pointer;
+    background: #2d2d30;
+    border-radius: 5px;
+    padding: 0.8rem;
+    margin: 1rem;
+    color: #fff;
+}
+
+.btn:hover {
+    background: #5a5a8b;
+}
+
+.btn:active {
+    background: #2d2d30;
+    padding: 0.7rem;
+    margin: 1.1rem;
+}
+
+.main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2vh 10vh;
+    text-align: justify;
+}
+
+.placeholder {
+    border: 1px solid #000;
+    margin: 2vh;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.placeholder--with-btn {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    border: 1px solid #000;
+    margin: 2vh;
+}
+
+.text {
+    padding: 0 5vh;
+}
+
+.text--with-background {
+    background-color: #adadfd;
+}
