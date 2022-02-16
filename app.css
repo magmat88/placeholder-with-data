@@ -28,6 +28,10 @@ body {
     margin: 1.1rem;
 }
 
+.hidden {
+    display: none;
+}
+
 .main {
     align-items: center;
     display: flex;
@@ -62,12 +66,19 @@ body {
     align-items: flex-start;
     justify-content: center;
     width: 100%;
-    border: 1px solid #000;
     margin: 2vh;
 }
 
 .text {
     padding: 0 5vh;
+}
+
+.title {
+    display: none;
+}
+
+figure {
+    width: 80%;
 }
 
 .text--with-background {
@@ -78,13 +89,17 @@ body {
     border-radius: 50%;
 }
 
+.visible {
+    display: flex;
+}
+
 /* source of loading indicator: https://icons8.com/cssload/en/spinners */
 
 .loading-indicator {
-    display: flex;
+    display: none;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     box-sizing: border-box;
     height: 90vh;
 }

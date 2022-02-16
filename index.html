@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Placeholder With Data</title>
-    <script src="app.js" defer></script>
     <link rel="stylesheet" href="app.css" />
   </head>
   <body>
@@ -39,27 +38,27 @@
       <article class="placeholder--with-btn">
         <div class="placeholder">
           <figure>
-            <figcaption><em>Chart 1. Chart description</em></figcaption>
+            <figcaption id='chartTitle' class="title"><em>Chart 1. Distribution of French men age.</em></figcaption>
             <div class="chart">
-              <div id="result"></div>
+              <canvas id="myChart" width="150" height="150"></canvas>
             </div>
           </figure>
           <figure>
-            <figcaption><em>Table 1. Table description</em></figcaption>
+            <figcaption id="tableTitle" class='title'><em>Table 1. Basic information about the oldest French men.</em></figcaption>
             <table class="table">
-              <thead>
-                <tr>
-                  <th colspan="2">The table header</th>
-                </tr>
+              <thead id="tableHeader">
+                <!-- <tr>
+                  <th>Thumbnail</th>
+                  <th>Age</th>
+                  <th>Name</th>
+                  <th>City</th>
+                </tr> -->
               </thead>
               <tbody id="tableResults">
-                <tr>
-                    <td>Thumbnail</td><td>Age</td><td>Name</td><td>City</td>
-                </tr>
               </tbody>
             </table>
           </figure>
-          <div class="loading-indicator">
+          <div class="loading-indicator" id="loadingIndicator">
             <div id="floatingCirclesG">
               <div class="f_circleG" id="frotateG_01"></div>
               <div class="f_circleG" id="frotateG_02"></div>
@@ -72,7 +71,7 @@
             </div>
           </div>
         </div>
-        <button class="btn">Click to load data</button>
+        <button class="btn" onclick="onClickHandler()">Click to load data</button>
       </article>
       <article class="text text--with-background">
         <p>
@@ -116,5 +115,7 @@
         </p>
       </article>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
