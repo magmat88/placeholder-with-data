@@ -1,3 +1,5 @@
+/* add media queries!!!!!!!!! */
+
 html, body {
     margin: 0;
     padding: 0;
@@ -41,6 +43,11 @@ body {
     text-align: justify;
 }
 
+.myChart {
+    width: 100; 
+    height: 100;
+}
+
 .placeholder {
     border: 1px solid #000;
     margin: 2vh;
@@ -67,7 +74,31 @@ body {
     justify-content: center;
     width: 100%;
     margin: 2vh;
+    font-size: 0.8rem;
+    border-collapse: collapse;
 }
+
+/* th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #5a5a8b;
+    color: white;
+} */
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+
 
 .text {
     padding: 0 5vh;
@@ -85,7 +116,7 @@ figure {
     background-color: #adadfd;
 }
 
-.thumbnail {
+.photo {
     border-radius: 50%;
 }
 

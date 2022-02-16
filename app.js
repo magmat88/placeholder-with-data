@@ -6,10 +6,10 @@ function getUsers() {
     });
 }
 function compareAge(a, b) {
-    if (a.dob.age < b.dob.age) {
+    if (a.dob.age > b.dob.age) {
         return -1;
     }
-    if (a.dob.age > b.dob.age) {
+    if (a.dob.age < b.dob.age) {
         return 1;
     }
     return 0;
@@ -28,7 +28,7 @@ const ageDistribution = {
     '90-99': 0,
 };
 function countUsersInRanges(users) {
-    users.forEach(user => {
+    users.forEach((user) => {
         if (user.dob.age >= 20 && user.dob.age < 30) {
             ageDistribution['20-29']++;
         }
@@ -55,39 +55,40 @@ function countUsersInRanges(users) {
         }
     });
 }
-const infoArr = ['Thumbnail', 'Age', 'Name', 'City'];
-function showTableHeader(infoArr) {
-    const tableHeader = document.getElementById('tableHeader');
-    const newTableRow = document.createElement('tr');
-    infoArr.forEach(info => {
-        const newHeader = document.createElement('th');
-        newHeader.innerHTML = info;
-        newTableRow.appendChild(newHeader);
-    });
-    tableHeader.appendChild(newTableRow);
-}
-function showTable(users) {
-    const tableResults = document.getElementById('tableResults');
-    showTableHeader(infoArr);
-    for (let i = 999; i >= 990; i--) {
-        const newTableRow = document.createElement('tr');
-        const newDataCellWithThumbnail = document.createElement('td');
-        const newThumbnail = document.createElement('img');
-        newThumbnail.setAttribute('src', `${users[i].picture.thumbnail}`);
-        newThumbnail.setAttribute('class', 'thumbnail');
-        newDataCellWithThumbnail.appendChild(newThumbnail);
-        newTableRow.appendChild(newDataCellWithThumbnail);
-        const newDataCellWithAge = document.createElement('td');
-        newDataCellWithAge.innerHTML = users[i].dob.age.toString();
-        newTableRow.appendChild(newDataCellWithAge);
-        const newDataCellWithName = document.createElement('td');
-        newDataCellWithName.innerHTML = `${users[i].name.first} ${users[i].name.last}`;
-        newTableRow.appendChild(newDataCellWithName);
-        const newDataCellWithCity = document.createElement('td');
-        newDataCellWithCity.innerHTML = users[i].location.city.toString();
-        newTableRow.appendChild(newDataCellWithCity);
-        tableResults.appendChild(newTableRow);
+function createTableHeader(user) {
+    let cells = '';
+    for (const key in user) {
+        cells += `
+      <th>${key.toUpperCase()}</th>
+    `;
     }
+    return `<tr>${cells}</tr>`;
+}
+function createTableRow(user) {
+    let cells = '';
+    for (const key in user) {
+        if (key === 'photo') {
+            cells += `
+      <td><img src=${user[key]} class=${key} /></td>
+    `;
+        }
+        else {
+            cells += `
+      <td>${user[key]}</td>
+    `;
+        }
+    }
+    return `<tr>${cells}</tr>`;
+}
+function createTable(users) {
+    const rows = users.map((user) => createTableRow(user));
+    const headerRow = createTableHeader(users[0]);
+    let tableBody = '';
+    rows.forEach((row) => (tableBody += row));
+    document.getElementById('table').innerHTML = `
+    <thead>${headerRow}</thead>
+    <tbody>${tableBody}</tbody>
+    `;
 }
 function showChart(users) {
     const labels = [];
@@ -117,27 +118,42 @@ function showChart(users) {
     const myChart = new Chart(document.getElementById('myChart'), config);
 }
 function showLoadingIndicator() {
-    const loadingIndicator = document.getElementById('loadingIndicator');
-    loadingIndicator === null || loadingIndicator === void 0 ? void 0 : loadingIndicator.setAttribute('class', 'visible');
+    document.getElementById('loadingIndicator').setAttribute('class', 'visible');
 }
 function hideLoadingIndicator() {
-    const loadingIndicator = document.getElementById('loadingIndicator');
-    loadingIndicator === null || loadingIndicator === void 0 ? void 0 : loadingIndicator.setAttribute('class', 'hidden');
+    document.getElementById('loadingIndicator').setAttribute('class', 'hidden');
 }
-const chartTitle = document.getElementById('chartTitle');
-const tableTitle = document.getElementById('tableTitle');
-function showTitles(chartTitle, tableTitle) {
-    chartTitle.setAttribute('class', 'visible');
-    tableTitle.setAttribute('class', 'visible');
+function showTitles() {
+    document.getElementById('chartTitle').setAttribute('class', 'visible');
+    document.getElementById('tableTitle').setAttribute('class', 'visible');
+}
+const basicUserInfos = [];
+function getBasicUserInfos(users) {
+    users.forEach(user => {
+        const basicUserInfo = {
+            photo: user.picture.thumbnail,
+            age: user.dob.age.toString(),
+            name: `${user.name.first} ${user.name.last}`,
+            city: user.location.city
+        };
+        basicUserInfos.push(basicUserInfo);
+        return basicUserInfos;
+    });
+}
+function sliceTenFirstUsers(users) {
+    return users.slice(0, 10);
 }
 function loadData() {
     return getUsers().then((users) => {
         sortByAge(users);
         countUsersInRanges(users);
+        users = sliceTenFirstUsers(users);
         hideLoadingIndicator();
-        showTitles(chartTitle, tableTitle);
+        showTitles();
         showChart(users);
-        showTable(users);
+        getBasicUserInfos(users);
+        console.log(basicUserInfos);
+        createTable(basicUserInfos);
     });
 }
 const onClickHandler = () => {

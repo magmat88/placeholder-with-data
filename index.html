@@ -40,22 +40,16 @@
           <figure>
             <figcaption id='chartTitle' class="title"><em>Chart 1. Distribution of French men age.</em></figcaption>
             <div class="chart">
-              <canvas id="myChart" width="150" height="150"></canvas>
+              <canvas id="myChart"></canvas>
             </div>
           </figure>
           <figure>
             <figcaption id="tableTitle" class='title'><em>Table 1. Basic information about the oldest French men.</em></figcaption>
-            <table class="table">
-              <thead id="tableHeader">
-                <!-- <tr>
-                  <th>Thumbnail</th>
-                  <th>Age</th>
-                  <th>Name</th>
-                  <th>City</th>
-                </tr> -->
+            <table class="table" id="table">
+              <!-- <thead id="tableHeader">
               </thead>
               <tbody id="tableResults">
-              </tbody>
+              </tbody> -->
             </table>
           </figure>
           <div class="loading-indicator" id="loadingIndicator">
@@ -71,7 +65,7 @@
             </div>
           </div>
         </div>
-        <button class="btn" onclick="onClickHandler()">Click to load data</button>
+        <button class="btn" onclick="onClickHandler()">Load data</button>
       </article>
       <article class="text text--with-background">
         <p>
