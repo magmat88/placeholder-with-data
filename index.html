@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Placeholder With Data</title>
     <link rel="stylesheet" href="app.css" />
+    <script>
+      const x = sessionStorage.getItem("pageRefreshCount");
+      if (!x) {
+        sessionStorage.setItem("pageRefreshCount", "0");
+      }
+    </script>
   </head>
   <body>
     <section class="main">
@@ -46,10 +52,6 @@
           <figure>
             <figcaption id="tableTitle" class='title'><em>Table 1. Basic information about the oldest French men.</em></figcaption>
             <table class="table" id="table">
-              <!-- <thead id="tableHeader">
-              </thead>
-              <tbody id="tableResults">
-              </tbody> -->
             </table>
           </figure>
           <div class="loading-indicator" id="loadingIndicator">
@@ -67,7 +69,7 @@
         </div>
         <button class="btn" onclick="onClickHandler()">Load data</button>
       </article>
-      <article class="text text--with-background">
+      <article id="textWithBackground" class="text">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -111,5 +113,10 @@
     </section>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="app.js"></script>
+    <script>
+      const pageRefreshCount = sessionStorage.getItem("pageRefreshCount");
+      const updatedPageRefreshCount = parseInt(pageRefreshCount) + 1;
+      sessionStorage.setItem('pageRefreshCount', updatedPageRefreshCount.toString());
+    </script>
   </body>
 </html>
