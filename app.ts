@@ -1,7 +1,9 @@
-const API_URL =
-  'https://randomuser.me/api/?results=1000&gender=male&nat=fr&inc=name,location,dob,picture&noinfo';
-const TEXT_WITH_BACKGROUND = "#textWithBackground";
-const USERS_COUNT = 10;
+interface BasicUserInfo {
+  photo: string;
+  age: string;
+  name: string;
+  city: string;
+}
 
 interface User {
   dob: {
@@ -39,66 +41,64 @@ interface User {
   };
 }
 
-function compareAge(a, b) {
-  if (a.dob.age > b.dob.age) {
-    return -1;
-  }
-  if (a.dob.age < b.dob.age) {
-    return 1;
-  }
-  return 0;
+type Users = Array<User>;
+
+const API_URL =
+  'https://randomuser.me/api/?results=1000&gender=male&nat=fr&inc=name,location,dob,picture&noinfo';
+const CHART_LABEL = 'Distribution of French Men Age';
+const CHART_TITLE = '#chartTitle';
+const CHART_TYPE = 'bar';
+const CLASS_HIDDEN = 'hidden';
+const CLASS_TEXT_WITH_BACKGROUND = 'text--with-background';
+const CLASS_VISIBLE = 'visible';
+const LOADING_INDICATOR = '#loadingIndicator';
+const MY_CHART = '#myChart';
+const PAGE_REFRESH_COUNT = 'pageRefreshCount';
+const TABLE = '#table';
+const TABLE_TITLE = '#tableTitle';
+const TEXT_WITH_BACKGROUND = '#textWithBackground';
+const USERS_COUNT = 10;
+
+enum AGE_RANGES {
+  TWENTY_YEAR_OLDS = '20-29',
+  THIRTY_YEAR_OLDS = '30-39',
+  FOURTY_YEAR_OLDS = '40-49',
+  FIFTY_YEAR_OLDS = '50-59',
+  SIXTY_YEAR_OLDS = '60-69',
+  SEVENTY_YEAR_OLDS = '70-79',
+  EIGHTY_YEAR_OLDS = '80-89',
 }
 
-function sortByAge(users) {
-  users.sort(compareAge);
+const ageDistribution = {
+  [AGE_RANGES.TWENTY_YEAR_OLDS]: 0,
+  [AGE_RANGES.THIRTY_YEAR_OLDS]: 0,
+  [AGE_RANGES.FOURTY_YEAR_OLDS]: 0,
+  [AGE_RANGES.FIFTY_YEAR_OLDS]: 0,
+  [AGE_RANGES.SIXTY_YEAR_OLDS]: 0,
+  [AGE_RANGES.SEVENTY_YEAR_OLDS]: 0,
+  [AGE_RANGES.EIGHTY_YEAR_OLDS]: 0,
+};
+
+function showLoadingIndicator(): void {
+  document
+    .querySelector(LOADING_INDICATOR)
+    ?.setAttribute('class', CLASS_VISIBLE);
 }
 
-
-function showChart(users) {
-  const labels: Array<string> = [];
-  const amountInRange: Array<number> = [];
-
-  for (const range in ageDistribution) {
-    labels.push(range);
-    amountInRange.push(ageDistribution[range]);
+function onClickHandler(): void {   
+  if (document.querySelector(CHART_TITLE)?.className === CLASS_VISIBLE) {
+    document.querySelector(CHART_TITLE)?.setAttribute('class', CLASS_HIDDEN);
   }
-
-  const chartData = {
-    labels: labels,
-    datasets: [
-      {
-        label: 'Distribution of French Men Age',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: amountInRange,
-      },
-    ],
-  };
-
-  const config = {
-    type: 'bar',
-    data: chartData,
-    options: {
-      responsive: true,
-    },
-  };
-
-  const myChart: Chart = new Chart(
-    document.getElementById('myChart') as HTMLCanvasElement,
-    config
-  );
-}
-
-function onClickHandler() {
+  if (document.querySelector(TABLE_TITLE)?.className === CLASS_VISIBLE) {
+    document.querySelector(TABLE_TITLE)?.setAttribute('class', CLASS_HIDDEN);
+  }
+  clearChart();
+  clearTable();
   showLoadingIndicator();
   loadData();
 }
 
-function showLoadingIndicator() {
-  document.getElementById('loadingIndicator')!.setAttribute('class', 'visible');
-}
-
-function loadData() {
+function loadData(): Promise<void> {
   return getUsers().then((users) => {
     sortByAge(users);
     countUsersInRanges(users);
@@ -115,16 +115,18 @@ function loadData() {
     ];
     hideLoadingIndicator();
     showTitles();
-    showChart(users);
+    createChart(users);
     createTable(basicUserInfos);
   });
 }
 
-function hideLoadingIndicator() {
-  document.getElementById('loadingIndicator')!.setAttribute('class', 'hidden');
+function hideLoadingIndicator(): void {
+  document
+    .querySelector(LOADING_INDICATOR)
+    ?.setAttribute('class', CLASS_HIDDEN);
 }
 
-function getUsers(): Promise<Array<User>> {
+function getUsers(): Promise<Users> {
   return fetch(API_URL)
     .then((res) => res.json())
     .then((res) => {
@@ -132,61 +134,53 @@ function getUsers(): Promise<Array<User>> {
     });
 }
 
-const ageDistribution = {
-  '20-29': 0,
-  '30-39': 0,
-  '40-49': 0,
-  '50-59': 0,
-  '60-69': 0,
-  '70-79': 0,
-  '80-89': 0,
-};
-
-function countUsersInRanges(users): void {
+function countUsersInRanges(users: Users): void {
   users.forEach((user) => {
     if (user.dob.age >= 20 && user.dob.age < 30) {
-      ageDistribution['20-29']++;
+      ageDistribution[AGE_RANGES.TWENTY_YEAR_OLDS]++;
     }
     if (user.dob.age >= 30 && user.dob.age < 40) {
-      ageDistribution['30-39']++;
+      ageDistribution[AGE_RANGES.THIRTY_YEAR_OLDS]++;
     }
     if (user.dob.age >= 40 && user.dob.age < 50) {
-      ageDistribution['40-49']++;
+      ageDistribution[AGE_RANGES.FOURTY_YEAR_OLDS]++;
     }
     if (user.dob.age >= 50 && user.dob.age < 60) {
-      ageDistribution['50-59']++;
+      ageDistribution[AGE_RANGES.FIFTY_YEAR_OLDS]++;
     }
     if (user.dob.age >= 60 && user.dob.age < 70) {
-      ageDistribution['60-69']++;
+      ageDistribution[AGE_RANGES.SIXTY_YEAR_OLDS]++;
     }
     if (user.dob.age >= 70 && user.dob.age < 80) {
-      ageDistribution['70-79']++;
+      ageDistribution[AGE_RANGES.SEVENTY_YEAR_OLDS]++;
     }
     if (user.dob.age >= 80 && user.dob.age < 90) {
-      ageDistribution['80-89']++;
+      ageDistribution[AGE_RANGES.EIGHTY_YEAR_OLDS]++;
     }
   });
 }
 
-function showTitles() {
-  document.getElementById('chartTitle')!.setAttribute('class', 'visible');
-  document.getElementById('tableTitle')!.setAttribute('class', 'visible');
+function showTitles(): void {
+  document.querySelector(CHART_TITLE)!.setAttribute('class', CLASS_VISIBLE);
+  document.querySelector(TABLE_TITLE)!.setAttribute('class', CLASS_VISIBLE);
 }
 
-function createTable(users) {
-  const headerRow = createTableHeader(users[0]);
-  const rows = users.map((user) => createTableRow(user));
+function createTable(basicUserInfos: Array<BasicUserInfo>) {
+  const headerRow = createTableHeader(basicUserInfos[0]);
+  const rows = basicUserInfos.map((basicUserInfo) =>
+    createTableRow(basicUserInfo)
+  );
   let tableBody = '';
   rows.forEach((row) => (tableBody += row));
-  document.getElementById('table')!.innerHTML = `
+  document.querySelector(TABLE)!.innerHTML = `
     <thead>${headerRow}</thead>
     <tbody>${tableBody}</tbody>
     `;
 }
 
-function createTableHeader(user) {
+function createTableHeader(basicUserInfo: BasicUserInfo) {
   let cells = '';
-  for (const key in user) {
+  for (const key in basicUserInfo) {
     cells += `
       <th>${key.toUpperCase()}</th>
     `;
@@ -194,27 +188,89 @@ function createTableHeader(user) {
   return `<tr>${cells}</tr>`;
 }
 
-function createTableRow(user) {
+function createTableRow(basicUserInfo: BasicUserInfo) {
   let cells = '';
-  for (const key in user) {
+  for (const key in basicUserInfo) {
     if (key === 'photo') {
       cells += `
-      <td><img src=${user[key]} class=${key} /></td>
+      <td><img src=${basicUserInfo[key]} class=${key} /></td>
     `;
     } else {
       cells += `
-      <td>${user[key]}</td>
+      <td>${basicUserInfo[key]}</td>
     `;
     }
   }
   return `<tr>${cells}</tr>`;
 }
 
-function changeParagraphColorOnFifthRefresh() {
-  const refreshCount = sessionStorage.getItem("pageRefreshCount") && parseInt(sessionStorage.getItem("pageRefreshCount") as string) || 0;
+function clearTable(): void {
+  document.querySelector(TABLE)!.innerHTML = '';
+}
+
+function compareAge(a: User, b: User): number {
+  if (a.dob.age > b.dob.age) {
+    return -1;
+  }
+  if (a.dob.age < b.dob.age) {
+    return 1;
+  }
+  return 0;
+}
+
+function sortByAge(users: Users) {
+  users.sort(compareAge);
+}
+
+function createChart(users: Users) {
+  const labels: Array<string> = [];
+  const amountInRange: Array<number> = [];
+
+  for (const range in ageDistribution) {
+    labels.push(range);
+    amountInRange.push(ageDistribution[range]);
+  }
+
+  const chartData = {
+    labels: labels,
+    datasets: [
+      {
+        label: CHART_LABEL,
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: amountInRange,
+      },
+    ],
+  };
+
+  const config = {
+    type: CHART_TYPE,
+    data: chartData,
+    options: {
+      responsive: true,
+    },
+  };
+
+  const myChart: Chart = new Chart(
+    document.querySelector(MY_CHART) as HTMLCanvasElement,
+    config
+  );
+}
+
+function clearChart():void {
+  document.querySelector("#chart")!.innerHTML = '<canvas id="myChart"></canvas>';
+}
+
+function changeParagraphColorOnFifthRefresh(): void {
+  const refreshCount =
+    (sessionStorage.getItem(PAGE_REFRESH_COUNT) &&
+      parseInt(sessionStorage.getItem(PAGE_REFRESH_COUNT) as string)) ||
+    0;
 
   if (refreshCount % 5 === 0) {
-    document.querySelector(TEXT_WITH_BACKGROUND)?.setAttribute('class', 'text--with-background');
+    document
+      .querySelector(TEXT_WITH_BACKGROUND)
+      ?.setAttribute('class', CLASS_TEXT_WITH_BACKGROUND);
   }
 }
 
