@@ -73,6 +73,7 @@ body {
 
 .photo {
     border-radius: 50%;
+    display: flex;
 }
 
 .placeholder {
@@ -107,7 +108,7 @@ body {
     color: white;
     padding-bottom: 12px;
     padding-top: 12px;
-    text-align: center;
+    text-align: left;
     width: 100%;
 }
 
@@ -115,7 +116,8 @@ body {
     align-content: center;
     border: 1px solid #ddd;
     line-height: 50px;
-    text-align: center;
+    padding-left: 20px;
+    text-align: left;
     width: 100px;
 }
 
