@@ -7,9 +7,9 @@
     <title>Placeholder With Data</title>
     <link rel="stylesheet" href="app.css" />
     <script>
-      const x = sessionStorage.getItem("pageRefreshCount");
+      const x = sessionStorage.getItem('pageRefreshCount');
       if (!x) {
-        sessionStorage.setItem("pageRefreshCount", "0");
+        sessionStorage.setItem('pageRefreshCount', '0');
       }
     </script>
   </head>
@@ -43,17 +43,6 @@
       </article>
       <article class="placeholder--with-btn">
         <div class="placeholder">
-          <figure>
-            <figcaption id="chartTitle" class="title"><em>Chart 1. Distribution of French men age.</em></figcaption>
-            <div class="chart" id="chart">
-              <canvas id="myChart"></canvas>
-            </div>
-          </figure>
-          <figure>
-            <figcaption id="tableTitle" class='title'><em>Table 1. Basic information about the oldest French men.</em></figcaption>
-            <table class="table" id="table">
-            </table>
-          </figure>
           <div class="loading-indicator" id="loadingIndicator">
             <div id="floatingCirclesG">
               <div class="f_circleG" id="frotateG_01"></div>
@@ -66,6 +55,20 @@
               <div class="f_circleG" id="frotateG_08"></div>
             </div>
           </div>
+          <figure class="figure--with-chart">
+            <figcaption id="chartTitle" class="title">
+              <em>Chart 1. Distribution of French men age.</em>
+            </figcaption>
+            <div class="chart" id="chart">
+              <canvas id="myChart"></canvas>
+            </div>
+          </figure>
+          <figure class="figure--with-table">
+            <figcaption id="tableTitle" class="title">
+              <em>Table 1. Basic information about the oldest French men.</em>
+            </figcaption>
+            <table class="table" id="table"></table>
+          </figure>
         </div>
         <button class="btn" onclick="onClickHandler()">Load data</button>
       </article>
@@ -114,9 +117,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="app.js"></script>
     <script>
-      const pageRefreshCount = sessionStorage.getItem("pageRefreshCount");
+      const pageRefreshCount = sessionStorage.getItem('pageRefreshCount');
       const updatedPageRefreshCount = parseInt(pageRefreshCount) + 1;
-      sessionStorage.setItem('pageRefreshCount', updatedPageRefreshCount.toString());
+      sessionStorage.setItem(
+        'pageRefreshCount',
+        updatedPageRefreshCount.toString()
+      );
     </script>
   </body>
 </html>

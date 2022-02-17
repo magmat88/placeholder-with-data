@@ -1,10 +1,11 @@
 const API_URL = 'https://randomuser.me/api/?results=1000&gender=male&nat=fr&inc=name,location,dob,picture&noinfo';
-const CHART_LABEL = 'Distribution of French Men Age';
+const CHART_LABEL = 'Amount of French Men in Age Range';
 const CHART_TITLE = '#chartTitle';
 const CHART_TYPE = 'bar';
 const CLASS_HIDDEN = 'hidden';
 const CLASS_TEXT_WITH_BACKGROUND = 'text--with-background';
 const CLASS_VISIBLE = 'visible';
+const COLOR = 'rgb(255, 99, 132)';
 const LOADING_INDICATOR = '#loadingIndicator';
 const MY_CHART = '#myChart';
 const PAGE_REFRESH_COUNT = 'pageRefreshCount';
@@ -14,13 +15,13 @@ const TEXT_WITH_BACKGROUND = '#textWithBackground';
 const USERS_COUNT = 10;
 var AGE_RANGES;
 (function (AGE_RANGES) {
-    AGE_RANGES["TWENTY_YEAR_OLDS"] = "20-29";
-    AGE_RANGES["THIRTY_YEAR_OLDS"] = "30-39";
-    AGE_RANGES["FOURTY_YEAR_OLDS"] = "40-49";
-    AGE_RANGES["FIFTY_YEAR_OLDS"] = "50-59";
-    AGE_RANGES["SIXTY_YEAR_OLDS"] = "60-69";
-    AGE_RANGES["SEVENTY_YEAR_OLDS"] = "70-79";
-    AGE_RANGES["EIGHTY_YEAR_OLDS"] = "80-89";
+    AGE_RANGES['TWENTY_YEAR_OLDS'] = '20-29';
+    AGE_RANGES['THIRTY_YEAR_OLDS'] = '30-39';
+    AGE_RANGES['FOURTY_YEAR_OLDS'] = '40-49';
+    AGE_RANGES['FIFTY_YEAR_OLDS'] = '50-59';
+    AGE_RANGES['SIXTY_YEAR_OLDS'] = '60-69';
+    AGE_RANGES['SEVENTY_YEAR_OLDS'] = '70-79';
+    AGE_RANGES['EIGHTY_YEAR_OLDS'] = '80-89';
 })(AGE_RANGES || (AGE_RANGES = {}));
 const ageDistribution = {
     [AGE_RANGES.TWENTY_YEAR_OLDS]: 0,
@@ -173,8 +174,8 @@ function createChart(users) {
         datasets: [
             {
                 label: CHART_LABEL,
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: COLOR,
+                borderColor: COLOR,
                 data: amountInRange,
             },
         ],
@@ -189,7 +190,7 @@ function createChart(users) {
     const myChart = new Chart(document.querySelector(MY_CHART), config);
 }
 function clearChart() {
-    document.querySelector("#chart").innerHTML = '<canvas id="myChart"></canvas>';
+    document.querySelector('#chart').innerHTML = '<canvas id="myChart"></canvas>';
 }
 function changeParagraphColorOnFifthRefresh() {
     var _a;

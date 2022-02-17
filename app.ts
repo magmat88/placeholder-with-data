@@ -45,7 +45,7 @@ type Users = Array<User>;
 
 const API_URL =
   'https://randomuser.me/api/?results=1000&gender=male&nat=fr&inc=name,location,dob,picture&noinfo';
-const CHART_LABEL = 'Distribution of French Men Age';
+const CHART_LABEL = 'Amount of French Men in Age Range';
 const CHART_TITLE = '#chartTitle';
 const CHART_TYPE = 'bar';
 const CLASS_HIDDEN = 'hidden';
