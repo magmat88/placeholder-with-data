@@ -9,13 +9,13 @@ body {
 }
 
 .btn {
-    border: 2px solid rgb(255, 99, 132);
-    cursor: pointer;
     background: rgb(248, 56, 98);
     border-radius: 5px;
-    padding: 0.8rem;
-    margin: 1rem;
+    border: 2px solid rgb(255, 99, 132);
     color: #fff;
+    cursor: pointer;
+    margin: 1rem;
+    padding: 0.8rem;
 }
 
 .btn:hover {
@@ -40,6 +40,7 @@ body {
     max-height: 500px;
     max-width: 700px;
     padding: 10px 0;
+    width: 80%;
 }
 
 .figure--with-table {
@@ -48,6 +49,7 @@ body {
     justify-content: center;
     max-width: 700px;
     padding: 10px 0;
+    width: 80%;
 }
 
 
@@ -65,61 +67,63 @@ body {
 }
 
 .myChart {
-    width: 100; 
     height: 100;
+    width: 100; 
+}
+
+.photo {
+    border-radius: 50%;
 }
 
 .placeholder {
-    border: 1px solid #000;
-    margin: 2vh 0.5vh;
-    width: 75%;
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-
 }
 
 .placeholder--with-btn {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+}
+
+.placeholder--with-figures {
+    border: 1px solid #000;
+    margin: 2vh 0.5vh;
+    width: 75%;
 }
 
 .table {
+    align-items: flex-start;
+    border-collapse: collapse;
     display: table;
     flex-direction: column;
-    align-items: flex-start;
+    font-size: 0.8rem;
     justify-content: center;
     width: 100%;
-    font-size: 0.8rem;
-    border-collapse: collapse;
 }
 
-th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
+.table th {
     background-color: rgb(255, 99, 132);
     color: white;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    text-align: center;
     width: 100%;
 }
 
-td, th {
+.table th, .table td {
+    align-content: center;
     border: 1px solid #ddd;
     line-height: 50px;
-    width: 100px;
     text-align: center;
-    align-content: center;
+    width: 100px;
 }
 
-tr:hover {
+.table tr:hover {
     background-color: #ddd;
 }
 
-tr:nth-child(even){
+.table tr:nth-child(even){
     background-color: #f2f2f2;
 }
 
@@ -131,17 +135,9 @@ tr:nth-child(even){
     display: none;
 }
 
-figure {
-    width: 80%;
-}
-
 .text--with-background {
     background-color: rgb(255, 168, 187);
     padding: 0 5vh;
-}
-
-.photo {
-    border-radius: 50%;
 }
 
 .visible {
@@ -151,135 +147,135 @@ figure {
 /* source of loading indicator: https://icons8.com/cssload/en/spinners */
 
 .loading-indicator {
+    align-items: flex-start;
     display: none;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
     margin-top: 400px;
 }
 
 #floatingCirclesG {
-    position: relative;
-    width: 125px;
+    -moz-transform: scale(0.4);
+    -ms-transform: scale(0.4);
+    -o-transform: scale(0.4);
+    -webkit-transform: scale(0.4);
     height: 125px;
     margin: auto;
+    position: relative;
     transform: scale(0.4);
-    -o-transform: scale(0.4);
-    -ms-transform: scale(0.4);
-    -webkit-transform: scale(0.4);
-    -moz-transform: scale(0.4);
+    width: 125px;
 }
 
 .f_circleG {
-    position: absolute;
-    background-color: rgb(255, 255, 255);
-    height: 22px;
-    width: 22px;
-    border-radius: 12px;
-    -o-border-radius: 12px;
-    -ms-border-radius: 12px;
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
-    animation-name: f_fadeG;
-    -o-animation-name: f_fadeG;
-    -ms-animation-name: f_fadeG;
-    -webkit-animation-name: f_fadeG;
-    -moz-animation-name: f_fadeG;
-    animation-duration: 1s;
-    -o-animation-duration: 1s;
-    -ms-animation-duration: 1s;
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    animation-iteration-count: infinite;
-    -o-animation-iteration-count: infinite;
-    -ms-animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
-    -moz-animation-iteration-count: infinite;
-    animation-direction: normal;
-    -o-animation-direction: normal;
-    -ms-animation-direction: normal;
-    -webkit-animation-direction: normal;
     -moz-animation-direction: normal;
+    -moz-animation-duration: 1s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-name: f_fadeG;
+    -moz-border-radius: 12px;
+    -ms-animation-direction: normal;
+    -ms-animation-duration: 1s;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-name: f_fadeG;
+    -ms-border-radius: 12px;
+    -o-animation-direction: normal;
+    -o-animation-duration: 1s;
+    -o-animation-iteration-count: infinite;
+    -o-animation-name: f_fadeG;
+    -o-border-radius: 12px;
+    -webkit-animation-direction: normal;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: f_fadeG;
+    -webkit-border-radius: 12px;
+    animation-direction: normal;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-name: f_fadeG;
+    background-color: rgb(255, 255, 255);
+    border-radius: 12px;
+    height: 22px;
+    position: absolute;
+    width: 22px;
 }
 
 #frotateG_01 {
+    -moz-animation-delay: 0.2s;
+    -ms-animation-delay: 0.2s;
+    -o-animation-delay: 0.2s;
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
     left: 0;
     top: 51px;
-    animation-delay: 0.2s;
-    -o-animation-delay: 0.2s;
-    -ms-animation-delay: 0.2s;
-    -webkit-animation-delay: 0.2s;
-    -moz-animation-delay: 0.2s;
 }
 
 #frotateG_02 {
+    -moz-animation-delay: 0.4s;
+    -ms-animation-delay: 0.4s;
+    -o-animation-delay: 0.4s;
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
     left: 15px;
     top: 15px;
-    animation-delay: 0.4s;
-    -o-animation-delay: 0.4s;
-    -ms-animation-delay: 0.4s;
-    -webkit-animation-delay: 0.4s;
-    -moz-animation-delay: 0.4s;
 }
 
 #frotateG_03 {
+    -moz-animation-delay: 0.6s;
+    -ms-animation-delay: 0.6s;
+    -o-animation-delay: 0.6s;
+    -webkit-animation-delay: 0.6s;
+    animation-delay: 0.6s;
     left: 51px;
     top: 0;
-    animation-delay: 0.6s;
-    -o-animation-delay: 0.6s;
-    -ms-animation-delay: 0.6s;
-    -webkit-animation-delay: 0.6s;
-    -moz-animation-delay: 0.6s;
 }
 
 #frotateG_04 {
+    -moz-animation-delay: 0.8s;
+    -ms-animation-delay: 0.8s;
+    -o-animation-delay: 0.8s;
+    -webkit-animation-delay: 0.8s;
+    animation-delay: 0.8s;
     right: 15px;
     top: 15px;
-    animation-delay: 0.8s;
-    -o-animation-delay: 0.8s;
-    -ms-animation-delay: 0.8s;
-    -webkit-animation-delay: 0.8s;
-    -moz-animation-delay: 0.8s;
 }
 
 #frotateG_05 {
+    -moz-animation-delay: 0.9s;
+    -ms-animation-delay: 0.9s;
+    -o-animation-delay: 0.9s;
+    -webkit-animation-delay: 0.9s;
+    animation-delay: 0.9s;
     right: 0;
     top: 51px;
-    animation-delay: 0.9s;
-    -o-animation-delay: 0.9s;
-    -ms-animation-delay: 0.9s;
-    -webkit-animation-delay: 0.9s;
-    -moz-animation-delay: 0.9s;
 }
 
 #frotateG_06 {
-    right: 15px;
-    bottom: 15px;
-    animation-delay: 1s;
-    -o-animation-delay: 1s;
-    -ms-animation-delay: 1s;
-    -webkit-animation-delay: 1s;
     -moz-animation-delay: 1s;
+    -ms-animation-delay: 1s;
+    -o-animation-delay: 1s;
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+    bottom: 15px;
+    right: 15px;
 }
 
 #frotateG_07 {
-    left: 51px;
-    bottom: 0;
-    animation-delay: 1.35s;
-    -o-animation-delay: 1.35s;
-    -ms-animation-delay: 1.35s;
-    -webkit-animation-delay: 1.35s;
     -moz-animation-delay: 1.35s;
+    -ms-animation-delay: 1.35s;
+    -o-animation-delay: 1.35s;
+    -webkit-animation-delay: 1.35s;
+    animation-delay: 1.35s;
+    bottom: 0;
+    left: 51px;
 }
 
 #frotateG_08 {
-    left: 15px;
-    bottom: 15px;
-    animation-delay: 1.5s;
-    -o-animation-delay: 1.5s;
-    -ms-animation-delay: 1.5s;
-    -webkit-animation-delay: 1.5s;
     -moz-animation-delay: 1.5s;
+    -ms-animation-delay: 1.5s;
+    -o-animation-delay: 1.5s;
+    -webkit-animation-delay: 1.5s;
+    animation-delay: 1.5s;
+    bottom: 15px;
+    left: 15px;
 }
 
 @keyframes f_fadeG {
@@ -332,12 +328,8 @@ figure {
     }
 }
 
-@media only screen and (min-width: 1024px) {
-    .main {
+@media only screen and (min-width: 1440px) {
+    .main, .placeholder {
         margin: 2vh 10vh;
     }
-
-    .placeholder {
-        margin: 2vh 10vh;
-    }  
 }
